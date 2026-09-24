@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect,useMemo } from "react"
 import { useCountryStore } from "./store/FetchCountry"
 import { useThemeStore } from "./store/Theme"
 import Cart from "./component/Cart"
@@ -16,19 +16,19 @@ export default function Home() {
 
 useEffect(() => {
   focusRef.current?.focus()
-
   if (countries.length === 0) {
     fetchCountries()
   }
 }, [])
 
-  const filtered = countries.filter((c) => {
-   
-    const value = searchTerm.toLowerCase().trim()
+  const filtered = useMemo(() => {
+  const value = searchTerm.toLowerCase().trim()
+  return countries.filter((c) => {
     const matchName = value ? c.name.common.toLowerCase().includes(value) : true
     const matchRegion = region ? c.region === region : true
     return matchName && matchRegion
   })
+}, [countries, searchTerm, region])
 
   return (
     <div
