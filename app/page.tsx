@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useCountryStore } from "./store/FetchCountry"
 import Cart from "./component/Cart"
 import RegionFilter from "./component/Region"
+import Stats from "./component/Stats"
 
 export default function Home() {
   const { countries, searchTerm, setSearchTerm } = useCountryStore()
@@ -44,8 +45,9 @@ export default function Home() {
           />
           <RegionFilter region={region} setRegion={setRegion} />
         </div>
+   <Stats filtered={filtered}/>
 
-        <Cart results={filtered} />
+        <Cart filtered={filtered} />
       </div>
     </div>
   )

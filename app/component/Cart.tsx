@@ -1,7 +1,7 @@
 "use client"
 
-export default function Cart({ results }) {
-  if (results.length === 0) {
+export default function Cart({ filtered }) {
+  if (filtered.length === 0) {
     return (
       <p className="text-center text-slate-400 col-span-full">
         هیچ کشوری پیدا نشد
@@ -11,7 +11,7 @@ export default function Cart({ results }) {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
-      {results.map((country) => (
+      {filtered.map((country) => (
         <div
           key={country.cca2}
           className="bg-white rounded-2xl p-5 shadow-sm hover:-translate-y-1 hover:shadow-lg transition flex flex-col items-center"
