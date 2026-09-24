@@ -5,16 +5,14 @@ import axios from "axios"
 export const useCountryStore = create(
   persist(
     (set) => ({
-      countries: [],       
-      loading: false,
+      countries: [],
+      loading: true,
       error: null,
       searchTerm: "",
 
       setSearchTerm: (value) => set({ searchTerm: value }),
 
-      fetchCountries: async (query) => {
-        if (!query?.trim()) return
-
+      fetchCountries: async () => {
         set({ loading: true, error: null })
         try {
           const response = await axios.get(
@@ -25,7 +23,7 @@ export const useCountryStore = create(
           set({
             error: err.response?.data?.message || err.message,
             loading: false,
-            countries: [],       // ✅ آرایه
+            countries: [],
           })
         }
       },
